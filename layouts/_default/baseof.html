@@ -21,6 +21,9 @@
     {{ if (and $.Site.Params.includeAuthorInTitle (in (slice "page" "taxonomy") .Page.Kind)) }} | {{ $.Site.Params.author }} {{ end }}
   </title>
   <link rel="stylesheet" href='{{ (.Scratch.Get "sass").Permalink }}'>
+  {{ if fileExists "static/syntax.css" -}}
+    <link rel="stylesheet" href='{{ .Site.BaseURL }}syntax.css'>
+  {{ end -}}
   <link rel="canonical" href="{{ .Permalink }}">
   {{ with $.Site.Home.OutputFormats.Get "rss" -}}
     <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
