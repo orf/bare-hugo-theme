@@ -8,6 +8,9 @@
 {{ .Scratch.Set "sass" ($sass | resources.ToCSS $options | resources.Minify) }}
 {{ end }}
 <head>
+  {{ template "_internal/opengraph.html" . }}
+  {{ template "_internal/schema.html" . }}
+  {{ template "_internal/twitter_cards.html" . }}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
@@ -30,8 +33,6 @@
   <meta name="referrer" content="no-referrer">
   {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
-
-  {{ template "_internal/opengraph.html" . }}
 </head>
 <body>
   {{- block "header" . }}
